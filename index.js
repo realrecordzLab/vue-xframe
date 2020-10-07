@@ -7,12 +7,14 @@
 import Vue from 'vue';
 
 export const xframe = {
-    bind(el, binding, vnode) {
-        let url = binding.value;
-        if( url && url.startsWith('https://www') ) {
+    update(el, binding, vnode) {
+        const url = binding.value;
+        const pattern = new RegExp(/(https?:\/\/)?[\w\-~]+(\.[\w\-~]+)+(\/[\w\-~]*)*(#[\w\-]*)?(\?.*)?/);
+        if( pattern.test(url) ) {
             fetch(`https://cors-anywhere.herokuapp.com/${url}`)
             .then( (res) => res.text() )
             .then( (data) => {
+                console.log(data);
                 let iframeContent = data.replace(/<head([^>]*)>/i, `<head$1>
                     <base href="${url}">
                         <script>

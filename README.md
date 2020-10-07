@@ -12,7 +12,7 @@ Import the file into your vue app entry point to register a global directive or 
 ```
 import Vue from 'vue';
 import App from './App';
-import Xframe from 'vue-xframe';
+import { xframe } from 'vue-xframe';
 
 //Global directive registration
 Vue.directive('xframe', xframe);
@@ -24,7 +24,7 @@ new Vue({
 
 //Local directive registration
 directives: {
-  Xframe
+  xframe
 }
 
 ```
